@@ -1,0 +1,23 @@
+{ 
+    "env": { 
+        "node": true, 
+        "browser": false, 
+        "es6": true, 
+        "jest/globals": true 
+    }, 
+    "extends": "airbnb-base", 
+    "plugins": [ 
+        "jest" 
+    ], 
+    "rules": { 
+        "no-underscore-dangle": [ 
+            "error", 
+            { 
+                "allow": [ 
+                    "__begin", 
+                    "__end" 
+                ] 
+            } 
+        ] 
+    } 
+} 
