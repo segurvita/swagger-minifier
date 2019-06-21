@@ -1,3 +1,4 @@
+import yaml from 'js-yaml';
 import * as scraper from '../lib/swagger-scraper';
 
 // sample yaml
@@ -133,16 +134,38 @@ paths:
 `;
 
 describe('swagger-scraper', () => {
-  test('Delete example', () => {
-    const result = scraper.deleteTarget(sampleFull, 'example');
-    expect(result).toBe(sampleDeleteExample);
+  describe('Format is string', () => {
+    test('Delete example', () => {
+      const strOutput = scraper.deleteTarget(sampleFull, 'example', 'string');
+      expect(strOutput).toBe(sampleDeleteExample);
+    });
+    test('Empty description', () => {
+      const strOutput = scraper.emptyTarget(sampleFull, 'description', 'string');
+      expect(strOutput).toBe(sampleEmptyDescription);
+    });
+    test('Delete parent of deprecated', () => {
+      const strOutput = scraper.deleteParent(sampleFull, 'deprecated', 'string');
+      expect(strOutput).toBe(sampleDeleteDeprecatedParent);
+    });
   });
-  test('Empty description', () => {
-    const result = scraper.emptyTarget(sampleFull, 'description');
-    expect(result).toBe(sampleEmptyDescription);
-  });
-  test('Delete parent of deprecated', () => {
-    const result = scraper.deleteParent(sampleFull, 'deprecated');
-    expect(result).toBe(sampleDeleteDeprecatedParent);
+  describe('Format is object', () => {
+    test('Delete example', () => {
+      const objInput = yaml.safeLoad(sampleFull);
+      const objOutput = scraper.deleteTarget(objInput, 'example', 'object');
+      const strOutput = yaml.safeDump(objOutput);
+      expect(strOutput).toBe(sampleDeleteExample);
+    });
+    test('Empty description', () => {
+      const objInput = yaml.safeLoad(sampleFull);
+      const objOutput = scraper.emptyTarget(objInput, 'description', 'object');
+      const strOutput = yaml.safeDump(objOutput);
+      expect(strOutput).toBe(sampleEmptyDescription);
+    });
+    test('Delete parent of deprecated', () => {
+      const objInput = yaml.safeLoad(sampleFull);
+      const objOutput = scraper.deleteParent(objInput, 'deprecated', 'object');
+      const strOutput = yaml.safeDump(objOutput);
+      expect(strOutput).toBe(sampleDeleteDeprecatedParent);
+    });
   });
 });
