@@ -24,7 +24,7 @@ Please call the module as following.
 ```javascript
 // import package
 import fs from 'fs';
-import * as scraper from 'swagger-rm-example';
+import * as scraper from 'swagger-scraper';
 
 // read yaml file
 const inputFile = "./swagger.yaml";
