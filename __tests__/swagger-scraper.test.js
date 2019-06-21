@@ -88,7 +88,7 @@ info:
   description: sample
   title: sample
 paths:
-  '/rooms/{room-id}':
+  '/rooms/{room-id}': {}
 `;
 
 describe('swagger-scraper', () => {
@@ -101,7 +101,7 @@ describe('swagger-scraper', () => {
     expect(result).toBe(sampleEmptyDescription);
   });
   test('Delete parent of deprecated', () => {
-    const result = scraper.emptyTarget(sampleFull, 'deprecated');
+    const result = scraper.deleteParent(sampleFull, 'deprecated');
     expect(result).toBe(sampleDeleteDeprecatedParent);
   });
 });
