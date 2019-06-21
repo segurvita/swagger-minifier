@@ -1,5 +1,5 @@
-import yaml from 'js-yaml';
-import * as scraper from '../lib/swagger-scraper';
+const yaml = require('js-yaml');
+const scraper = require('../lib/swagger-scraper');
 
 // sample yaml
 const sampleFull = `swagger: '2.0'
