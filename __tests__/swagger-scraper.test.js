@@ -8,6 +8,7 @@ info:
 paths:
   '/rooms/{room-id}':
     get:
+      deprecated: true
       description: room
       parameters:
         - name: room-id
@@ -25,9 +26,21 @@ paths:
               comment:
                 type: string
                 example: 404
+  '/rooms/{room-id}/doors':
+    get:
+      deprecated: true
+      responses:
+        '200':
+          schema:
+            type: array
+    post:
+      responses:
+        '200':
+          schema:
+            type: object
 `;
 
-// sample yaml without exammple for test
+// sample yaml for test to delete example
 const sampleDeleteExample = `swagger: '2.0'
 info:
   description: sample
@@ -35,6 +48,7 @@ info:
 paths:
   '/rooms/{room-id}':
     get:
+      deprecated: true
       description: room
       parameters:
         - name: room-id
@@ -50,9 +64,21 @@ paths:
                 type: integer
               comment:
                 type: string
+  '/rooms/{room-id}/doors':
+    get:
+      deprecated: true
+      responses:
+        '200':
+          schema:
+            type: array
+    post:
+      responses:
+        '200':
+          schema:
+            type: object
 `;
 
-// sample yaml without exammple for test
+// sample yaml for test to empty description
 const sampleEmptyDescription = `swagger: '2.0'
 info:
   description: ''
@@ -60,6 +86,7 @@ info:
 paths:
   '/rooms/{room-id}':
     get:
+      deprecated: true
       description: ''
       parameters:
         - name: room-id
@@ -77,6 +104,32 @@ paths:
               comment:
                 type: string
                 example: 404
+  '/rooms/{room-id}/doors':
+    get:
+      deprecated: true
+      responses:
+        '200':
+          schema:
+            type: array
+    post:
+      responses:
+        '200':
+          schema:
+            type: object
+`;
+
+// sample yaml for test to delete parent of deprecated
+const sampleDeleteDeprecatedParent = `swagger: '2.0'
+info:
+  description: sample
+  title: sample
+paths:
+  '/rooms/{room-id}/doors':
+    post:
+      responses:
+        '200':
+          schema:
+            type: object
 `;
 
 describe('swagger-scraper', () => {
@@ -87,5 +140,9 @@ describe('swagger-scraper', () => {
   test('Empty description', () => {
     const result = scraper.emptyTarget(sampleFull, 'description');
     expect(result).toBe(sampleEmptyDescription);
+  });
+  test('Delete parent of deprecated', () => {
+    const result = scraper.deleteParent(sampleFull, 'deprecated');
+    expect(result).toBe(sampleDeleteDeprecatedParent);
   });
 });
