@@ -25,7 +25,7 @@ npm install swagger-scraper
 ```javascript
 // ライブラリを追加
 import fs from 'fs';
-import * as scraper from 'swagger-rm-example';
+import * as scraper from 'swagger-scraper';
 
 // YAMLファイルを読み込み
 const inputFile = "./swagger.yaml";
