@@ -8,6 +8,7 @@ info:
 paths:
   '/rooms/{room-id}':
     get:
+      deprecated: true
       description: room
       parameters:
         - name: room-id
@@ -27,7 +28,7 @@ paths:
                 example: 404
 `;
 
-// sample yaml without exammple for test
+// sample yaml for test to delete example
 const sampleDeleteExample = `swagger: '2.0'
 info:
   description: sample
@@ -35,6 +36,7 @@ info:
 paths:
   '/rooms/{room-id}':
     get:
+      deprecated: true
       description: room
       parameters:
         - name: room-id
@@ -52,7 +54,7 @@ paths:
                 type: string
 `;
 
-// sample yaml without exammple for test
+// sample yaml for test to empty description
 const sampleEmptyDescription = `swagger: '2.0'
 info:
   description: ''
@@ -60,6 +62,7 @@ info:
 paths:
   '/rooms/{room-id}':
     get:
+      deprecated: true
       description: ''
       parameters:
         - name: room-id
@@ -79,6 +82,15 @@ paths:
                 example: 404
 `;
 
+// sample yaml for test to delete parent of deprecated
+const sampleDeleteDeprecatedParent = `swagger: '2.0'
+info:
+  description: sample
+  title: sample
+paths:
+  '/rooms/{room-id}':
+`;
+
 describe('swagger-scraper', () => {
   test('Delete example', () => {
     const result = scraper.deleteTarget(sampleFull, 'example');
@@ -87,5 +99,9 @@ describe('swagger-scraper', () => {
   test('Empty description', () => {
     const result = scraper.emptyTarget(sampleFull, 'description');
     expect(result).toBe(sampleEmptyDescription);
+  });
+  test('Delete parent of deprecated', () => {
+    const result = scraper.emptyTarget(sampleFull, 'deprecated');
+    expect(result).toBe(sampleDeleteDeprecatedParent);
   });
 });
