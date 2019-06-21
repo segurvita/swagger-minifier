@@ -23,8 +23,8 @@ Please call the module as following.
 
 ```javascript
 // import package
-import fs from 'fs';
-import * as scraper from 'swagger-scraper';
+const fs = require('fs');
+const scraper = require('swagger-scraper');
 
 // read yaml file
 const inputFile = "./swagger.yaml";
