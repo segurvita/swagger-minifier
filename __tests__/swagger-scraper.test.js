@@ -26,6 +26,18 @@ paths:
               comment:
                 type: string
                 example: 404
+  '/rooms/{room-id}/doors':
+    get:
+      deprecated: true
+      responses:
+        '200':
+          schema:
+            type: array
+    post:
+      responses:
+        '200':
+          schema:
+            type: object
 `;
 
 // sample yaml for test to delete example
@@ -52,6 +64,18 @@ paths:
                 type: integer
               comment:
                 type: string
+  '/rooms/{room-id}/doors':
+    get:
+      deprecated: true
+      responses:
+        '200':
+          schema:
+            type: array
+    post:
+      responses:
+        '200':
+          schema:
+            type: object
 `;
 
 // sample yaml for test to empty description
@@ -80,6 +104,18 @@ paths:
               comment:
                 type: string
                 example: 404
+  '/rooms/{room-id}/doors':
+    get:
+      deprecated: true
+      responses:
+        '200':
+          schema:
+            type: array
+    post:
+      responses:
+        '200':
+          schema:
+            type: object
 `;
 
 // sample yaml for test to delete parent of deprecated
@@ -88,7 +124,12 @@ info:
   description: sample
   title: sample
 paths:
-  '/rooms/{room-id}': {}
+  '/rooms/{room-id}/doors':
+    post:
+      responses:
+        '200':
+          schema:
+            type: object
 `;
 
 describe('swagger-scraper', () => {
