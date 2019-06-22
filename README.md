@@ -1,4 +1,4 @@
-# swagger-scraper
+# swagger-scraper [![Build Status](https://travis-ci.org/segurvita/swagger-scraper.svg?branch=master)](https://travis-ci.org/segurvita/swagger-scraper)
 <div style="text-align:right">Language: <i>English</i> | <a href="README_JA.md">日本語</a></div>
 
 This module minify your swagger file.
@@ -54,15 +54,15 @@ Delete the item whose key is `scrapTarget`. It can be used for method chain.
 
 ### emptyTarget(scrapTarget)
 
-Replace the value of `scrapTarget` with key `''` . It can be used for method chain.
+Replace the value of `scrapTarget` with `''` . It can be used for method chain.
 
 ### deleteParent(scrapTarget)
 
-Delete the element whose child has the item whose key is `scrapTarget`. It can be used for method chain.
+Delete the element whose child has `scrapTarget`. It can be used for method chain.
 
 ### toString()
 
-Generate a YAML format string based on the current processing data and return it.
+Generate a YAML format string based on the current data and return it.
 
 
 
