@@ -42,6 +42,30 @@ console.log(outputSwagger);
 
 
 
+# API
+
+### scraper(inputSwagger)
+
+Parses `inputSwagger` as YAML format. Please call this function first, and then connect method chains below.
+
+### deleteTarget(scrapTarget)
+
+Delete the item whose key is `scrapTarget`. It can be used for method chain.
+
+### emptyTarget(scrapTarget)
+
+Replace the value of `scrapTarget` with key `''` . It can be used for method chain.
+
+### deleteParent(scrapTarget)
+
+Delete the element whose child has the item whose key is `scrapTarget`. It can be used for method chain.
+
+### toString()
+
+Generate a YAML format string based on the current processing data and return it.
+
+
+
 # Development
 
 If you edit this project, you can clone it from the repository and build the development environment with the following command.

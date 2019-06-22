@@ -43,6 +43,30 @@ console.log(outputSwagger);
 
 
 
+# API
+
+### scraper(inputSwagger)
+
+`inputSwagger` をYAML形式として解析します。 最初にこの関数を呼んでから、以下のメソッドチェーンを繋いでください。
+
+### deleteTarget(scrapTarget)
+
+keyが `scrapTarget` の項目を削除します。メソッドチェーンに使えます。
+
+### emptyTarget(scrapTarget)
+
+keyが `scrapTarget` のvalueを `''` に置換します。メソッドチェーンに使えます。
+
+### deleteParent(scrapTarget)
+
+子にkeyが `scrapTarget` の項目を持つ要素を削除します。メソッドチェーンに使えます。
+
+### toString()
+
+現在の加工データをもとにYAML形式の文字列を生成し、返却します。
+
+
+
 # 開発環境構築
 
 本プロジェクトを編集した場合、リポジトリから本プロジェクトをクローンし、以下のコマンドで開発環境を構築できます。
