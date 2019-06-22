@@ -1,138 +1,20 @@
+const fs = require('fs');
 const yaml = require('js-yaml');
 const scraper = require('../lib/swagger-scraper');
 
 // sample yaml
-const sampleFull = `swagger: '2.0'
-info:
-  description: sample
-  title: sample
-paths:
-  '/rooms/{room-id}':
-    get:
-      deprecated: true
-      description: room
-      parameters:
-        - name: room-id
-          in: path
-          type: integer
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: object
-            properties:
-              id:
-                type: integer
-                example: 404
-              comment:
-                type: string
-                example: 404
-  '/rooms/{room-id}/doors':
-    get:
-      deprecated: true
-      responses:
-        '200':
-          schema:
-            type: array
-    post:
-      responses:
-        '200':
-          schema:
-            type: object
-`;
+const sampleFull = fs.readFileSync('./sample/sample-full.yaml', 'utf8');
 
 // sample yaml for test to delete example
-const sampleDeleteExample = `swagger: '2.0'
-info:
-  description: sample
-  title: sample
-paths:
-  '/rooms/{room-id}':
-    get:
-      deprecated: true
-      description: room
-      parameters:
-        - name: room-id
-          in: path
-          type: integer
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: object
-            properties:
-              id:
-                type: integer
-              comment:
-                type: string
-  '/rooms/{room-id}/doors':
-    get:
-      deprecated: true
-      responses:
-        '200':
-          schema:
-            type: array
-    post:
-      responses:
-        '200':
-          schema:
-            type: object
-`;
+const sampleDeleteExample = fs.readFileSync('./sample/sample-delete-example.yaml', 'utf8');
 
 // sample yaml for test to empty description
-const sampleEmptyDescription = `swagger: '2.0'
-info:
-  description: ''
-  title: sample
-paths:
-  '/rooms/{room-id}':
-    get:
-      deprecated: true
-      description: ''
-      parameters:
-        - name: room-id
-          in: path
-          type: integer
-      responses:
-        '200':
-          description: ''
-          schema:
-            type: object
-            properties:
-              id:
-                type: integer
-                example: 404
-              comment:
-                type: string
-                example: 404
-  '/rooms/{room-id}/doors':
-    get:
-      deprecated: true
-      responses:
-        '200':
-          schema:
-            type: array
-    post:
-      responses:
-        '200':
-          schema:
-            type: object
-`;
+const sampleEmptyDescription = fs.readFileSync('./sample/sample-empty-description.yaml', 'utf8');
 
 // sample yaml for test to delete parent of deprecated
-const sampleDeleteDeprecatedParent = `swagger: '2.0'
-info:
-  description: sample
-  title: sample
-paths:
-  '/rooms/{room-id}/doors':
-    post:
-      responses:
-        '200':
-          schema:
-            type: object
-`;
+const sampleDeleteDeprecatedParent = fs.readFileSync('./sample/sample-delete-deprecated-parent.yaml', 'utf8');
 
+// unit test
 describe('swagger-scraper', () => {
   describe('Format is string', () => {
     test('Delete example', () => {
