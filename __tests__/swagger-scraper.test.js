@@ -50,4 +50,20 @@ describe('swagger-scraper', () => {
       expect(strOutput).toBe(sampleDeleteDeprecatedParent);
     });
   });
+  describe('Exception test', () => {
+    test('Falsy', () => {
+      try {
+        scraper.deleteTarget('', 'example', 'string');
+      } catch (error) {
+        expect(error.message).toBe('inputSwagger is falsy.');
+      }
+    });
+    test('Falsy', () => {
+      try {
+        scraper.deleteTarget('hoge', 'example', 'string');
+      } catch (error) {
+        expect(error.message).toBe('Loading yaml is failed.');
+      }
+    });
+  });
 });
