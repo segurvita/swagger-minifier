@@ -27,15 +27,42 @@ const fs = require('fs');
 const scraper = require('swagger-scraper');
 
 // read yaml file
-const inputFile = "./swagger.yaml";
-const inputStr = fs.readFileSync(inputFile, 'utf8');
+const inputSwagger = fs.readFileSync('./swagger.yaml', 'utf8');
 
-// remove example from string
-const outputStr = scraper.deleteTarget(inputStr, 'example', 'string');
+// delete example and empty description and delete parent of deprecated
+const outputSwagger = scraper(inputSwagger)
+  .deleteTarget('example')
+  .emptyTarget('description')
+  .deleteParent('deprecated')
+  .toString();
 
 // display result
-console.log(outputStr);
+console.log(outputSwagger);
 ```
+
+
+
+# API
+
+### scraper(inputSwagger)
+
+Parses `inputSwagger` as YAML format. Please call this function first, and then connect method chains below.
+
+### deleteTarget(scrapTarget)
+
+Delete the item whose key is `scrapTarget`. It can be used for method chain.
+
+### emptyTarget(scrapTarget)
+
+Replace the value of `scrapTarget` with key `''` . It can be used for method chain.
+
+### deleteParent(scrapTarget)
+
+Delete the element whose child has the item whose key is `scrapTarget`. It can be used for method chain.
+
+### toString()
+
+Generate a YAML format string based on the current processing data and return it.
 
 
 

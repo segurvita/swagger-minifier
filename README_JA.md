@@ -28,15 +28,42 @@ const fs = require('fs');
 const scraper = require('swagger-scraper');
 
 // YAMLファイルを読み込み
-const inputFile = "./swagger.yaml";
-const inputStr = fs.readFileSync(inputFile, 'utf8');
+const inputSwagger = fs.readFileSync('./swagger.yaml', 'utf8');
 
-// 文字列からexampleを削除
-const outputStr = scraper.deleteTarget(inputStr, 'example', 'string');
+// exampleを削除し、descriptionを空にし、deprecatedの親を削除する
+const outputSwagger = scraper(inputSwagger)
+  .deleteTarget('example')
+  .emptyTarget('description')
+  .deleteParent('deprecated')
+  .toString();
 
 // 結果を表示
-console.log(outputStr);
+console.log(outputSwagger);
 ```
+
+
+
+# API
+
+### scraper(inputSwagger)
+
+`inputSwagger` をYAML形式として解析します。 最初にこの関数を呼んでから、以下のメソッドチェーンを繋いでください。
+
+### deleteTarget(scrapTarget)
+
+keyが `scrapTarget` の項目を削除します。メソッドチェーンに使えます。
+
+### emptyTarget(scrapTarget)
+
+keyが `scrapTarget` のvalueを `''` に置換します。メソッドチェーンに使えます。
+
+### deleteParent(scrapTarget)
+
+子にkeyが `scrapTarget` の項目を持つ要素を削除します。メソッドチェーンに使えます。
+
+### toString()
+
+現在の加工データをもとにYAML形式の文字列を生成し、返却します。
 
 
 
