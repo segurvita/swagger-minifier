@@ -27,14 +27,17 @@ const fs = require('fs');
 const scraper = require('swagger-scraper');
 
 // read yaml file
-const inputFile = "./swagger.yaml";
-const inputStr = fs.readFileSync(inputFile, 'utf8');
+const inputSwagger = fs.readFileSync('./swagger.yaml', 'utf8');
 
-// remove example from string
-const outputStr = scraper.deleteTarget(inputStr, 'example', 'string');
+// delete example and empty description and delete parent of deprecated
+const outputSwagger = scraper(inputSwagger)
+  .deleteTarget('example')
+  .emptyTarget('description')
+  .deleteParent('deprecated')
+  .toString();
 
 // display result
-console.log(outputStr);
+console.log(outputSwagger);
 ```
 
 
