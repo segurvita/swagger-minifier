@@ -1,6 +1,6 @@
 const fs = require('fs');
 const yaml = require('js-yaml');
-const scraper = require('../lib/swagger-scraper');
+const Scraper = require('../lib/swagger-scraper');
 
 // sample yaml
 const sampleFull = fs.readFileSync('./sample/sample-full.yaml', 'utf8');
@@ -18,34 +18,34 @@ const sampleDeleteDeprecatedParent = fs.readFileSync('./sample/sample-delete-dep
 describe('swagger-scraper', () => {
   describe('Format is string', () => {
     test('Delete example', () => {
-      const strOutput = scraper.deleteTarget(sampleFull, 'example', 'string');
+      const strOutput = Scraper(sampleFull).deleteTarget('example').toString();
       expect(strOutput).toBe(sampleDeleteExample);
     });
     test('Empty description', () => {
-      const strOutput = scraper.emptyTarget(sampleFull, 'description', 'string');
+      const strOutput = Scraper(sampleFull).emptyTarget('description').toString();
       expect(strOutput).toBe(sampleEmptyDescription);
     });
     test('Delete parent of deprecated', () => {
-      const strOutput = scraper.deleteParent(sampleFull, 'deprecated', 'string');
+      const strOutput = Scraper(sampleFull).deleteParent('deprecated').toString();
       expect(strOutput).toBe(sampleDeleteDeprecatedParent);
     });
   });
   describe('Format is object', () => {
     test('Delete example', () => {
       const objInput = yaml.safeLoad(sampleFull);
-      const objOutput = scraper.deleteTarget(objInput, 'example', 'object');
+      const objOutput = Scraper(objInput).deleteTarget('example').toObject();
       const strOutput = yaml.safeDump(objOutput);
       expect(strOutput).toBe(sampleDeleteExample);
     });
     test('Empty description', () => {
       const objInput = yaml.safeLoad(sampleFull);
-      const objOutput = scraper.emptyTarget(objInput, 'description', 'object');
+      const objOutput = Scraper(objInput).emptyTarget('description').toObject();
       const strOutput = yaml.safeDump(objOutput);
       expect(strOutput).toBe(sampleEmptyDescription);
     });
     test('Delete parent of deprecated', () => {
       const objInput = yaml.safeLoad(sampleFull);
-      const objOutput = scraper.deleteParent(objInput, 'deprecated', 'object');
+      const objOutput = Scraper(objInput).deleteParent('deprecated').toObject();
       const strOutput = yaml.safeDump(objOutput);
       expect(strOutput).toBe(sampleDeleteDeprecatedParent);
     });
@@ -53,14 +53,14 @@ describe('swagger-scraper', () => {
   describe('Exception test', () => {
     test('Falsy', () => {
       try {
-        scraper.deleteTarget('', 'example', 'string');
+        Scraper('').deleteTarget('example').toString();
       } catch (error) {
         expect(error.message).toBe('inputSwagger is falsy.');
       }
     });
     test('Falsy', () => {
       try {
-        scraper.deleteTarget('hoge', 'example', 'string');
+        Scraper('hoge').deleteTarget('example').toString();
       } catch (error) {
         expect(error.message).toBe('Loading yaml is failed.');
       }
