@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
-    "js-yaml": "^3.13.1"
+    "js-yaml": "^3.13.1",
+    "yaml-scraper": "^0.1.1"
   },
   "devDependencies": {
     "babel-jest": "^24.8.0",
