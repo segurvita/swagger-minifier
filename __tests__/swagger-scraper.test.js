@@ -14,6 +14,9 @@ const sampleEmptyDescription = fs.readFileSync('./sample/sample-empty-descriptio
 // sample yaml for test to delete parent of deprecated
 const sampleDeleteDeprecatedParent = fs.readFileSync('./sample/sample-delete-deprecated-parent.yaml', 'utf8');
 
+// sample yaml for test to delete deprecated method
+const sampleDeleteDeprecatedMethod = fs.readFileSync('./sample/sample-delete-deprecated-method.yaml', 'utf8');
+
 // unit test
 describe('swagger-scraper', () => {
   describe('Format is string', () => {
@@ -48,6 +51,12 @@ describe('swagger-scraper', () => {
       const objOutput = Scraper(objInput).deleteParent('deprecated').toObject();
       const strOutput = yaml.safeDump(objOutput);
       expect(strOutput).toBe(sampleDeleteDeprecatedParent);
+    });
+    test('Delete deprecated method', () => {
+      const objInput = yaml.safeLoad(sampleFull);
+      const objOutput = Scraper(objInput).deleteDeprecatedMethod().toObject();
+      const strOutput = yaml.safeDump(objOutput);
+      expect(strOutput).toBe(sampleDeleteDeprecatedMethod);
     });
   });
   describe('Exception test', () => {
