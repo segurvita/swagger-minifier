@@ -60,6 +60,10 @@ Replace the value of `scrapTarget` with `''` . It can be used for method chain.
 
 Delete the element whose child has `scrapTarget`. It can be used for method chain.
 
+### deleteDeprecatedMethod()
+
+This API removes the `deprecated` method element. In addition, if there is a path element that does not have a method element, it is also deleted. It can be used for method chain.
+
 ### toString()
 
 Generate a YAML format string based on the current data and return it.

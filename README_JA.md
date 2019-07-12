@@ -61,6 +61,10 @@ keyが `scrapTarget` のvalueを `''` に置換します。メソッドチェー
 
 子にkeyが `scrapTarget` の項目を持つ要素を削除します。メソッドチェーンに使えます。
 
+### deleteDeprecatedMethod()
+
+`deprecated` 指定されたmethod要素を削除します。加えて、method要素を１つも持たないpath要素があれば、それも削除します。メソッドチェーンに使えます。
+
 ### toString()
 
 現在の加工データをもとにYAML形式の文字列を生成し、返却します。
