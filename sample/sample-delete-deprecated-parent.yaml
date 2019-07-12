@@ -3,6 +3,7 @@ info:
   description: sample
   title: sample
 paths:
+  '/rooms/{room-id}': {}
   '/rooms/{room-id}/doors':
     post:
       responses:
