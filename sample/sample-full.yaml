@@ -23,6 +23,8 @@ paths:
               comment:
                 type: string
                 example: 404
+      security:
+        - api_key: []
   '/rooms/{room-id}/doors':
     get:
       deprecated: true
@@ -30,8 +32,12 @@ paths:
         '200':
           schema:
             type: array
+      security:
+        - api_key: []
     post:
       responses:
         '200':
           schema:
             type: object
+      security:
+        - api_key: []
