@@ -9,3 +9,5 @@ paths:
         '200':
           schema:
             type: object
+      security:
+        - api_key: []
