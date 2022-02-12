@@ -9,7 +9,7 @@ node_js:
   - "7"
   - "6"
 
-# safelist
+# safe list
 branches:
   only:
   - master
