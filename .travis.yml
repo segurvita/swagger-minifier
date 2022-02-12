@@ -1,15 +1,15 @@
 language: node_js
 node_js:
-  - "node"
-  - "12"
-  - "11"
-  - "10"
-  - "9"
-  - "8"
-  - "7"
-  - "6"
+  - 'node'
+  - '12'
+  - '11'
+  - '10'
+  - '9'
+  - '8'
+  - '7'
+  - '6'
 
-# safelist
+# safe list
 branches:
   only:
-  - master
+    - master
