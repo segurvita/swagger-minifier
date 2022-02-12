@@ -1,7 +1,7 @@
 {
   "name": "swagger-scraper",
   "description": "This library minify your swagger file.",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "author": "segur",
   "babel": {
     "plugins": [
